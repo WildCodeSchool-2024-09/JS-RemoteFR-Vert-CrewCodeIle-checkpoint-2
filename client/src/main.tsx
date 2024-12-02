@@ -7,10 +7,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 
+import CupcakeDetailsPage from "./pages/CupcakeDetailsPage";
 import CupcakeList from "./pages/CupcakeList";
 import Home from "./pages/Home";
 import Instructions from "./pages/Instructions";
-import CupcakeDetailsPage from "./pages/CupcakeDetailsPage";
 
 const router = createBrowserRouter([
   {
