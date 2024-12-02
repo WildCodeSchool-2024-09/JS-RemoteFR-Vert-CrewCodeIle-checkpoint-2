@@ -1,5 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
+import { useEffect } from "react";
 
 /* ************************************************************************* */
 const sampleCupcakes = [
@@ -40,7 +41,7 @@ type CupcakeArray = typeof sampleCupcakes;
 
 function CupcakeList() {
   // Step 1: get all cupcakes
-  console.info(useLoaderData() as CupcakeArray);
+  const cupcakeData = useLoaderData() as CupcakeArray;
 
   // Step 3: get all accessories
 
@@ -59,14 +60,17 @@ function CupcakeList() {
           </select>
         </label>
       </form>
-      <ul className="cupcake-list" id="cupcake-list">
-        {/* Step 2: repeat this block for each cupcake */}
-        {/* Step 5: filter cupcakes before repeating */}
-        <li className="cupcake-item">
-          <Cupcake data={sampleCupcakes[0]} />
-        </li>
-        {/* end of block */}
-      </ul>
+      {cupcakeData.map((c) => (
+        <ul key={c.id} className="cupcake-list" id="cupcake-list">
+          {/* Step 2: repeat this block for each cupcake */}
+
+          {/* Step 5: filter cupcakes before repeating */}
+          <li className="cupcake-item">
+            <Cupcake data={c} />
+          </li>
+          {/* end of block */}
+        </ul>
+      ))}
     </>
   );
 }
