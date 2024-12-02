@@ -73,6 +73,7 @@ function CupcakeList() {
             value={filterCupcake}
             onChange={(e) => setFilterCupcake(e.target.value)}
           >
+            <option value="">---</option>
             {cupcakeAccessories.map((c) => (
               <option key={c.id} value={c.slug}>
                 {c.name}
