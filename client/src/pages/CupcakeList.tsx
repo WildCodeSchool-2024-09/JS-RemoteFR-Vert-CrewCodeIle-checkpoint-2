@@ -1,18 +1,39 @@
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
 
-function CupcakeList() {
-  const cupcakes = useLoaderData() as {
-    id: number;
-    accessory: string;
-    color1: string;
-    color2: string;
-    color3: string;
-    name: string;
-  }[];
+type CupcakeData = {
+  id: number;
+  accessory: string;
+  color1: string;
+  color2: string;
+  color3: string;
+  name: string;
+};
 
-  console.info(cupcakes);
-  // Step 3: get all accessories
+type AccessoryArray = { id: number; name: string; slug: string }[];
+
+function CupcakeList() {
+  const cupcakes = useLoaderData() as CupcakeData[];
+
+  const [accessories, setAccessories] = useState<AccessoryArray>([]);
+
+  useEffect(() => {
+    const fetchAccessories = async () => {
+      try {
+        const response = await fetch("http://localhost:3310/api/accessories");
+        if (!response.ok) {
+          throw new Error("Failed to fetch accessories");
+        }
+        const data: AccessoryArray = await response.json();
+        setAccessories(data);
+      } catch (error) {
+        console.error("Error fetching accessories:", error);
+      }
+    };
+
+    fetchAccessories();
+  }, []);
 
   // Step 5: create filter state
 
@@ -25,13 +46,17 @@ function CupcakeList() {
           Filter by{" "}
           <select id="cupcake-select">
             <option value="">---</option>
-            {/* Step 4: add an option for each accessory */}
+            {/* Step 4: Add an option for each accessory */}
+            {accessories.map((accessory) => (
+              <option key={accessory.id} value={accessory.id}>
+                {accessory.name}
+              </option>
+            ))}
           </select>
         </label>
       </form>
       <ul className="cupcake-list" id="cupcake-list">
         {cupcakes.map((cupcake) => (
-          /* Step 5: filter cupcakes before repeating */
           <li key={cupcake.id} className="cupcake-item">
             <Cupcake data={cupcake} />
           </li>
