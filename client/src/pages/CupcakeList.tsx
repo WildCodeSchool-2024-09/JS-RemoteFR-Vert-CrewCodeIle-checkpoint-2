@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { type SetStateAction, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
 
@@ -45,6 +45,7 @@ function CupcakeList() {
   const cupcakes = useLoaderData() as CupcakeArray;
 
   const [cakes, setCakes] = useState<AccessoryArray>([]);
+  const [choose, setChoose] = useState<string>("");
 
   useEffect(() => {
     fetch("http://localhost:3310/api/accessories")
@@ -53,7 +54,11 @@ function CupcakeList() {
       .catch((error) => console.error(error));
   }, []);
 
-  // Step 5: create filter state
+  const filteredCupcakes = choose
+    ? cupcakes.filter((cupcake) => cupcake.accessory_id === choose)
+    : cupcakes;
+  const handleClick = (e: { target: { value: SetStateAction<string> } }) =>
+    setChoose(e.target.value);
 
   return (
     <>
@@ -62,7 +67,7 @@ function CupcakeList() {
         <label htmlFor="cupcake-select">
           {/* Step 5: use a controlled component for select */}
           Filter by {/* Step 4: add an option for each accessory */}
-          <select id="cupcake-select">
+          <select id="cupcake-select" onChange={handleClick}>
             <option value="">---</option>
             {cakes.map((c) => (
               <option key={c.id} value={c.slug}>
@@ -73,7 +78,7 @@ function CupcakeList() {
         </label>
       </form>
       <ul className="cupcake-list" id="cupcake-list">
-        {cupcakes.map((a) => (
+        {filteredCupcakes.map((a) => (
           <li className="cupcake-item" key={a.id}>
             <Cupcake data={a} />
           </li>
