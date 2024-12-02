@@ -67,8 +67,6 @@ function CupcakeList() {
                 {accessory.name}
               </option>
             ))}
-
-            {/* Step 4: add an option for each accessory */}
           </select>
         </label>
       </form>
