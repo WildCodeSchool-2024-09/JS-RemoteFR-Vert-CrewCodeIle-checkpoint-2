@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
 
@@ -33,6 +34,7 @@ const sampleCupcakes = [
 ];
 
 type CupcakeArray = typeof sampleCupcakes;
+type AccessoryArray = { id: number; name: string; slug: string }[];
 
 /* you can use sampleCupcakes if you're stucked on step 1 */
 /* if you're fine with step 1, just ignore this ;) */
@@ -42,7 +44,13 @@ function CupcakeList() {
   const cupcakeList = useLoaderData() as CupcakeArray;
   console.info(useLoaderData() as CupcakeArray);
 
-  // Step 3: get all accessories
+  const [accessories, setAccessories] = useState<AccessoryArray>([]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/accessories`)
+      .then((response) => response.json())
+      .then((data: AccessoryArray) => setAccessories(data));
+  }, []);
 
   // Step 5: create filter state
 
@@ -54,7 +62,12 @@ function CupcakeList() {
           {/* Step 5: use a controlled component for select */}
           Filter by{" "}
           <select id="cupcake-select">
-            <option value="">---</option>
+            {accessories.map((accessory) => (
+              <option value={accessory.id} key={accessory.id}>
+                {accessory.name}
+              </option>
+            ))}
+
             {/* Step 4: add an option for each accessory */}
           </select>
         </label>
