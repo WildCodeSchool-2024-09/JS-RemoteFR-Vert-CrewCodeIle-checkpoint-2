@@ -40,10 +40,10 @@ type CupcakeArray = typeof sampleCupcakes;
 
 function CupcakeList() {
   // Step 1: get all cupcakes
-  console.info(useLoaderData() as CupcakeArray);
+  const data = useLoaderData();
+  console.info(data as CupcakeArray);
 
   // Step 3: get all accessories
-
   // Step 5: create filter state
 
   return (
