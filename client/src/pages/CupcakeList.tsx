@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
 
@@ -9,6 +10,12 @@ type CupcakeData = {
   color2: string;
   color3: string;
   name: string;
+};
+
+type AccessoryArray = {
+  id: number;
+  name: string;
+  slug: string;
 };
 
 /* ************************************************************************* */
@@ -54,6 +61,24 @@ function CupcakeList() {
   console.log(cupcakes);
 
   // Step 3: get all accessories
+  const [accessories, setAccessories] = useState<AccessoryArray[]>([]);
+
+  useEffect(() => {
+    const fetchAccessories = async () => {
+      try {
+        const response = await fetch("http://localhost:3310/api/accessories");
+        if (!response.ok) {
+          throw new Error("Failed to fetch accessories");
+        }
+        const data = await response.json();
+        setAccessories(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAccessories();
+  }, []);
 
   // Step 5: create filter state
 
