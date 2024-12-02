@@ -61,15 +61,13 @@ function CupcakeList() {
       <form className="center">
         <label htmlFor="cupcake-select">
           {/* Step 5: use a controlled component for select */}
-          Filter by{" "}
+          Filter by {/* Step 4: add an option for each accessory */}
           <select id="cupcake-select">
             <option value="">---</option>
-            {/* Step 4: add an option for each accessory */}
             {cakes.map((c) => (
-              <div key={c.id}>
-                <h2>{c.name}</h2>
-                <p>{c.slug}</p>
-              </div>
+              <option key={c.id} value={c.slug}>
+                {c.name}
+              </option>
             ))}
           </select>
         </label>
