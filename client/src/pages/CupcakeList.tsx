@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
 import type { accessoriesType } from "../assets/lib/definitions";
 import Cupcake from "../components/Cupcake";
 
@@ -91,9 +91,11 @@ function CupcakeList() {
         {/* Step 2: repeat this block for each cupcake */}
         {/* Step 5: filter cupcakes before repeating */}
         {cupcakesListFiltred.map((c) => (
-          <li className="cupcake-item" key={c.id}>
-            <Cupcake data={c} />
-          </li>
+          <NavLink to={`/cupcakes/${c.id}`} key={c.id}>
+            <li className="cupcake-item" key={c.id}>
+              <Cupcake data={c} />
+            </li>
+          </NavLink>
         ))}
         {/* end of block */}
       </ul>
