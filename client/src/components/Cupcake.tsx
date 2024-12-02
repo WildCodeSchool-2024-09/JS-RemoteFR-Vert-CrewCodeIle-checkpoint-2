@@ -1,18 +1,10 @@
+import { NavLink } from "react-router-dom";
+import type { CupcakeType } from "../lib/definition";
 import "./Cupcake.css";
 
-interface CupcakeProps {
-  data: {
-    accessory: string;
-    color1: string;
-    color2: string;
-    color3: string;
-    name: string;
-  };
-}
-
-function Cupcake({ data }: CupcakeProps) {
+function Cupcake({ data }: { data: CupcakeType }) {
   return (
-    <div className="cupcake-container">
+    <NavLink to={`/cupcakes/${data.id}`} className="cupcake-container">
       <div className="cupcake">
         <div className={`accessory ${data.accessory}`} />
         <div className="cream">
@@ -49,7 +41,7 @@ function Cupcake({ data }: CupcakeProps) {
       </div>
 
       <div className="cupcake-name">{data.name}</div>
-    </div>
+    </NavLink>
   );
 }
 

@@ -10,6 +10,8 @@ const sampleData = {
   color2: "var(--default-cream-color)",
   color3: "var(--default-cream-color)",
   name: "",
+  accessory_id: "2",
+  id: 99,
 };
 
 function Home() {
