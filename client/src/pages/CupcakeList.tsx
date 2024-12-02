@@ -1,6 +1,16 @@
 import { useLoaderData } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
 
+type CupcakeData = {
+  id: number;
+  accessory_id: string;
+  accessory: string;
+  color1: string;
+  color2: string;
+  color3: string;
+  name: string;
+};
+
 /* ************************************************************************* */
 const sampleCupcakes = [
   {
@@ -40,7 +50,8 @@ type CupcakeArray = typeof sampleCupcakes;
 
 function CupcakeList() {
   // Step 1: get all cupcakes
-  console.info(useLoaderData() as CupcakeArray);
+  const cupcakes = useLoaderData() as CupcakeData[];
+  console.log(cupcakes);
 
   // Step 3: get all accessories
 
