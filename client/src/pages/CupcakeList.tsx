@@ -84,7 +84,7 @@ function CupcakeList() {
           {/* Step 5: use a controlled component for select */}
           Filter by{" "}
           <select id="cupcake-select" onChange={handleOnChange}>
-            <option value="accessory">---</option>
+            <option value="">---</option>
             {/* Step 4: add an option for each accessory */}
             {accessoryList.map((a) => (
               <option value={a.name.toLowerCase().replace(" ", "-")} key={a.id}>
@@ -97,13 +97,19 @@ function CupcakeList() {
       <ul className="cupcake-list" id="cupcake-list">
         {/* Step 2: repeat this block for each cupcake */}
         {/* Step 5: filter cupcakes before repeating */}
-        {sampleCupcakes
-          .filter((a) => a.accessory.includes(selectAccessory))
-          .map((cupcake) => (
-            <li className="cupcake-item" key={cupcake.id}>
-              <Cupcake data={cupcake} />
-            </li>
-          ))}
+        {selectAccessory
+          ? sampleCupcakes
+              .filter((a) => a.accessory.includes(selectAccessory))
+              .map((cupcake) => (
+                <li className="cupcake-item" key={cupcake.id}>
+                  <Cupcake data={cupcake} />
+                </li>
+              ))
+          : sampleCupcakes.map((cupcake) => (
+              <li className="cupcake-item" key={cupcake.id}>
+                <Cupcake data={cupcake} />
+              </li>
+            ))}
         {/* end of block */}
       </ul>
     </>
