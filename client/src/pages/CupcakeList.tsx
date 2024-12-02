@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
+
 import Cupcake from "../components/Cupcake";
-import { useEffect } from "react";
 
 /* ************************************************************************* */
 const sampleCupcakes = [
