@@ -11,6 +11,20 @@ import CupcakeList from "./pages/CupcakeList";
 import Home from "./pages/Home";
 import Instructions from "./pages/Instructions";
 
+async function cupcakesLoader() {
+  try {
+    const response = await fetch("http://localhost:3310/api/cupcakes");
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des cupcakes");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erreur:", error);
+    return [];
+  }
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: "/cupcakes",
         element: <CupcakeList />,
-        // Step 1: load data here
+        loader: cupcakesLoader,
       },
     ],
   },
