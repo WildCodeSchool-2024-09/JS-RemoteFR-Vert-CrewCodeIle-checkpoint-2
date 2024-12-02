@@ -11,7 +11,12 @@ Pour exemple, si ta fonction recevait le tableau ci-dessous en paramètre, tu de
 */
 
 function getPoints(results: string[]): number {
-  // Your code here !
+  /*
+  STEP 1 : initialisation d'une variable de points pour additionner les points obtenus
+  STEP 2 : Faire une boucle sur le tableau des résultats en filtrant les victoires / nuls / défaites
+  STEP 3 : Créer la condition de cumul des points victoire = 3pt / nul = 1pt / défaite = 0pt
+  STEP 4 : injecter dans le retour le total du cumul des points
+  */
   return 0;
 }
 
