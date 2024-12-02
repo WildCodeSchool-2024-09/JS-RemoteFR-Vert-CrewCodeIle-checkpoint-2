@@ -27,7 +27,12 @@ const router = createBrowserRouter([
       {
         path: "/cupcakes",
         element: <CupcakeList />,
-        // Step 1: load data here
+        loader: async () => {
+          const response = await fetch(
+            `${import.meta.env.VITE_API_URL_CUPCAKES}`,
+          );
+          return response.json();
+        },
       },
     ],
   },
