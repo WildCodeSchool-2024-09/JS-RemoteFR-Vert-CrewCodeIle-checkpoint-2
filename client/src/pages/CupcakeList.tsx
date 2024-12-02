@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import type { accessoriesType } from "../assets/lib/definitions";
 import Cupcake from "../components/Cupcake";
 
 /* ************************************************************************* */
@@ -37,13 +39,21 @@ type CupcakeArray = typeof sampleCupcakes;
 /* you can use sampleCupcakes if you're stucked on step 1 */
 /* if you're fine with step 1, just ignore this ;) */
 /* ************************************************************************* */
+const API_ACCESSORIES = import.meta.env.VITE_API_URL_ACCESSORIES;
 
 function CupcakeList() {
   // Step 1: get all cupcakes
   const cupcakesList = useLoaderData() as CupcakeArray;
 
   // Step 3: get all accessories
+  const [accessories, setAccessories] = useState<accessoriesType | null>();
 
+  useEffect(() => {
+    fetch(API_ACCESSORIES)
+      .then((response) => response.json())
+      .then((data) => setAccessories(data));
+  }, []);
+  console.info(accessories as accessoriesType);
   // Step 5: create filter state
 
   return (
